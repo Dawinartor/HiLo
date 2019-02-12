@@ -54,9 +54,10 @@ const anleitung = document.createElement("p");
 const inhaltZ0Anleitung = document.createTextNode("Deine Aufgabe ist es die zufällige Zahl zu erraten.");
 const inhaltZ1Anleitung = document.createTextNode("Gib dafür einfach eine Zahl in das Feld ein und drück auf den Button.");
 const eingabeInput = document.createElement("input");
-const eingabeButton = document.createElement("button");
+const eingabeButton = document.createElement("input");
 const tooHiOtooLo = document.createElement("p");
 var inhaltTHOTL = document.createTextNode("Die entsprechende Ausgabe");
+var derEchteTipp;
 //append everything on HTML-document:
 document.body.append(dieForm);
 dieForm.appendChild(anleitung);
@@ -71,33 +72,43 @@ tooHiOtooLo.appendChild(inhaltTHOTL);
 //The paragraphs above input field:
 anleitung.style.color = '#FF00FF';
 //The whole form:
-dieForm.style.color = 'black';
+dieForm.style.backgroundColor = 'default';
+dieForm.onsubmit = 'return false';
+dieForm.onclick = 'console.log("esay")';
 //The input field:
+eingabeInput.id = 'derTip';
 eingabeInput.type = 'number';
-eingabeInput.value = 'number';
+eingabeInput.name = 'deinTip';
 eingabeInput.style.position = 'fixed';
 eingabeInput.style.left = 20 + 'px';
 eingabeInput.style.width = 200 + 'px';
 eingabeInput.style.height = 25 + 'px';
+eingabeInput.style.backgroundColor = 'orange';
 //The Button:
-eingabeButton.innerHTML = 'Tip abgeben';
-eingabeButton.type = 'submit';
-eingabeButton.value = 'number';
+eingabeButton.value = 'Tip abgeben';
+eingabeButton.type = 'button';
+eingabeButton.onclick = 'getTip()';
 eingabeButton.style.position = 'fixed';
 eingabeButton.style.width = 90 + 'px';
 eingabeButton.style.height = 25 + 'px';
 eingabeButton.style.left = 225 + 'px';
+eingabeButton.style.color = 'cyan';
 //Output if too High or too Low:
-// -> Try to implement: if input number is too high -> output is in red. Else output is green.
+// -> Try to implement: if input number is too high -> output is in red / Else output is green.
 tooHiOtooLo.style.position = 'fixed';
-tooHiOtooLo.style.top = 100 + 'px';
-tooHiOtooLo.style.left = 50 + 'px';
+tooHiOtooLo.style.fontSize = '155%';
+tooHiOtooLo.style.top = 130 + 'px';
+tooHiOtooLo.style.left = 25 + 'px';
 //Gathering of functions:
-
-//Testzweck:
-function gedrueckt(){
-    if(eingabeButton.onclick == true){
-    console.log("Dude");
-    }
+function getTip(){
+    derEchteTipp = document.getElementById("derTip").value;
+    console.log(derEchteTipp);
 }
-gedrueckt();
+console.log(eingabeInput.value);
+
+//Testzwecke:
+
+function getEingabem(){
+    var Eingaben = document.getElementById("derName").value + document.getElementById("dasAlter").value;
+    console.log(Eingaben);
+}

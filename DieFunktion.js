@@ -57,29 +57,32 @@ const eingabeInput = document.createElement("input");
 const eingabeButton = document.createElement("input");
 const tooHiOtooLo = document.createElement("p");
 var inhaltTHOTL = document.createTextNode("Die entsprechende Ausgabe");
-var derEchteTipp;
+var derEchteTipp = 0;
 //append everything on HTML-document:
 document.body.append(dieForm);
-dieForm.appendChild(anleitung);
+document.body.append(anleitung);
+document.body.append(tooHiOtooLo);
 dieForm.appendChild(eingabeInput);
 dieForm.appendChild(eingabeButton);
-dieForm.appendChild(tooHiOtooLo);
 anleitung.appendChild(inhaltZ0Anleitung);
 anleitung.appendChild(umbruch);
 anleitung.appendChild(inhaltZ1Anleitung);
 tooHiOtooLo.appendChild(inhaltTHOTL);
+
 //adjust things that I create.
 //The paragraphs above input field:
 anleitung.style.color = '#FF00FF';
+anleitung.style.position = 'fixed';
+anleitung.style.top = 50 + 'px';
 //The whole form:
 dieForm.style.backgroundColor = 'default';
-dieForm.onsubmit = 'return false';
+//dieForm.onsubmit = 'return false';
 dieForm.onclick = 'console.log("esay")';
 //The input field:
 eingabeInput.id = 'derTip';
 eingabeInput.type = 'number';
-eingabeInput.name = 'deinTip';
 eingabeInput.style.position = 'fixed';
+eingabeInput.style.top = 115 + 'px';
 eingabeInput.style.left = 20 + 'px';
 eingabeInput.style.width = 200 + 'px';
 eingabeInput.style.height = 25 + 'px';
@@ -87,8 +90,9 @@ eingabeInput.style.backgroundColor = 'orange';
 //The Button:
 eingabeButton.value = 'Tip abgeben';
 eingabeButton.type = 'button';
-eingabeButton.onclick = 'getTip()';
+eingabeButton.addEventListener("click", getTip);
 eingabeButton.style.position = 'fixed';
+eingabeButton.style.top = 114 + 'px';
 eingabeButton.style.width = 90 + 'px';
 eingabeButton.style.height = 25 + 'px';
 eingabeButton.style.left = 225 + 'px';
@@ -101,14 +105,10 @@ tooHiOtooLo.style.top = 130 + 'px';
 tooHiOtooLo.style.left = 25 + 'px';
 //Gathering of functions:
 function getTip(){
-    derEchteTipp = document.getElementById("derTip").value;
+    derEchteTipp = eingabeInput.value;
     console.log(derEchteTipp);
 }
-console.log(eingabeInput.value);
+console.log(document.getElementById("derTip").value);
 
 //Testzwecke:
 
-function getEingabem(){
-    var Eingaben = document.getElementById("derName").value + document.getElementById("dasAlter").value;
-    console.log(Eingaben);
-}

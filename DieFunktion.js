@@ -49,18 +49,20 @@ while((eingabe != zufaeligeZahl) && (counter <= 7)){
 
 //create things that I need:
 const umbruch = document.createElement("br");
+const dieForm = document.createElement("form");
 const anleitung = document.createElement("p");
 const inhaltZ0Anleitung = document.createTextNode("Deine Aufgabe ist es die zufällige Zahl zu erraten.");
 const inhaltZ1Anleitung = document.createTextNode("Gib dafür einfach eine Zahl in das Feld ein und drück auf den Button.");
-const eingabeForm = document.createElement("input");
+const eingabeInput = document.createElement("input");
 const eingabeButton = document.createElement("button");
 const tooHiOtooLo = document.createElement("p");
 var inhaltTHOTL = document.createTextNode("Die entsprechende Ausgabe");
 //append everything on HTML-document:
-document.body.append(anleitung);
-document.body.append(eingabeForm);
-document.body.append(eingabeButton);
-document.body.append(tooHiOtooLo);
+document.body.append(dieForm);
+dieForm.appendChild(anleitung);
+dieForm.appendChild(eingabeInput);
+dieForm.appendChild(eingabeButton);
+dieForm.appendChild(tooHiOtooLo);
 anleitung.appendChild(inhaltZ0Anleitung);
 anleitung.appendChild(umbruch);
 anleitung.appendChild(inhaltZ1Anleitung);
@@ -68,19 +70,21 @@ tooHiOtooLo.appendChild(inhaltTHOTL);
 //adjust things that I create.
 //The paragraphs above input field:
 anleitung.style.color = '#FF00FF';
-//The insert field:
-eingabeForm.type = 'number';
-eingabeForm.value = 'number';
-eingabeForm.style.position = 'fixed';
-eingabeForm.style.left = 20 + 'px';
-eingabeForm.style.width = 200 + 'px';
-eingabeForm.style.height = 25 + 'px';
+//The whole form:
+dieForm.style.color = 'black';
+//The input field:
+eingabeInput.type = 'number';
+eingabeInput.value = 'number';
+eingabeInput.style.position = 'fixed';
+eingabeInput.style.left = 20 + 'px';
+eingabeInput.style.width = 200 + 'px';
+eingabeInput.style.height = 25 + 'px';
 //The Button:
 eingabeButton.innerHTML = 'Tip abgeben';
 eingabeButton.type = 'submit';
 eingabeButton.value = 'number';
 eingabeButton.style.position = 'fixed';
-eingabeButton.style.width = 100 + 'px';
+eingabeButton.style.width = 90 + 'px';
 eingabeButton.style.height = 25 + 'px';
 eingabeButton.style.left = 225 + 'px';
 //Output if too High or too Low:
@@ -89,9 +93,11 @@ tooHiOtooLo.style.position = 'fixed';
 tooHiOtooLo.style.top = 100 + 'px';
 tooHiOtooLo.style.left = 50 + 'px';
 //Gathering of functions:
-/*
-var gedrückt = 0;
-function buttonWurdegedrückt(){
-    if
+
+//Testzweck:
+function gedrueckt(){
+    if(eingabeButton.onclick == true){
+    console.log("Dude");
+    }
 }
-*/
+gedrueckt();

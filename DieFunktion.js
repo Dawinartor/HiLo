@@ -87,9 +87,6 @@ dieForm.style.top = 65 + 'px';
 //The input field:
 eingabeInput.id = 'derTip';
 eingabeInput.type = 'number';
-//eingabeInput.style.position = 'fixed';
-//eingabeInput.style.top = 115 + 'px';
-//eingabeInput.style.left = 10 + 'px';
 eingabeInput.style.width = 200 + 'px';
 eingabeInput.style.height = 25 + 'px';
 eingabeInput.style.backgroundColor = 'orange';
@@ -99,7 +96,7 @@ eingabeButton.value = 'Tip abgeben';
 eingabeButton.type = 'button';
 eingabeButton.addEventListener("click", getTip);
 eingabeButton.addEventListener("click", console.log(counter));
-eingabeButton.addEventListener("click", highOrLow);
+eingabeButton.addEventListener("click", highOrLow3P5);
 eingabeButton.style.width = 90 + 'px';
 eingabeButton.style.height = 25 + 'px';
 eingabeButton.style.color = 'red';
@@ -123,6 +120,24 @@ function highOrLow(){
     } else if (meinTip < zufaeligeZahl) {
         tooHiOtooLo.innerHTML = "Deine Zahl ist kleiner als die gesuchte Zahl!";
     } else if (meinTip == zufaeligeZahl) {
+        tooHiOtooLo.innerHTML = "Du hast die richtige Zahl erraten!";
+    } else {
+        tooHiOtooLo.innerHTML = "Etwas stimmt nicht";//Test Zweck!
+    }
+
+}
+
+//Version 3.5 with adding that if number is too high red output / too low green output / else golden ouput.
+function highOrLow3P5(){
+
+    if(meinTip > zufaeligeZahl){
+        tooHiOtooLo.style.color = 'red';
+        tooHiOtooLo.innerHTML = "Deine Zahl ist größer als die gesuchte Zahl!";
+    } else if (meinTip < zufaeligeZahl) {
+        tooHiOtooLo.style.color = 'green';
+        tooHiOtooLo.innerHTML = "Deine Zahl ist kleiner als die gesuchte Zahl!";
+    } else if (meinTip == zufaeligeZahl) {
+        tooHiOtooLo.style.color = 'gold';
         tooHiOtooLo.innerHTML = "Du hast die richtige Zahl erraten!";
     } else {
         tooHiOtooLo.innerHTML = "Etwas stimmt nicht";//Test Zweck!

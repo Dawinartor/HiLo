@@ -314,7 +314,7 @@ eingabeInput.style.height = 25 + 'px';
 eingabeButton.value = 'Tip abgeben';
 eingabeButton.type = 'button';
 eingabeButton.addEventListener("click", getTip);//This function will activate from top to bottom.
-eingabeButton.addEventListener("click", eingabeGemacht);
+eingabeButton.addEventListener("click", bestimmteEingabe);
 eingabeButton.style.width = 90 + 'px';
 eingabeButton.style.height = 25 + 'px';
 eingabeButton.style.color = 'black';
@@ -346,12 +346,14 @@ counterZahl.style.fontSize = 150 + '%';
 //counterZahl.style.top = 7 + 'px';
 
 //Every Number that you already tipped:
-// -> var getippteZahl = new Array[5];
+// -> var getippteZahl = new Array[5];      Next version will show all inserts in a array and in a box in HTML-document!!!
 
 //Gathering of functions:
 function getTip(){
     meinTip = eingabeInput.value;
     if(eingabeInput.value == ''){
+        counter = counter;
+    } else if(eingabeInput.value % 1 != 0) {
         counter = counter;
     } else {
         counter++;
@@ -361,10 +363,15 @@ function getTip(){
 
 }
 
-function eingabeGemacht(){
+function bestimmteEingabe(){
     if(eingabeInput.value == '') {
+        tooHiOtooLo.style.color = 'brown';
         tooHiOtooLo.innerHTML = "Du musst schon eine Zahl eingeben, um das Spiel zu spielen!";
         console.log("Eingabe wurde nicht gemacht!");
+    } else if(eingabeInput.value % 1 != 0) {
+        tooHiOtooLo.style.color = 'grey';
+        tooHiOtooLo.innerHTML = "Kommazahlen sind nicht erlaubt";
+        console.log("Eingabe wurde gemacht aber falsch!");
     } else {
         console.log("Eingabe wurde gemacht!");
         highOrLow5();
@@ -412,3 +419,6 @@ function highOrLow5(){
 
 }
 
+function keineKommazahlen(){
+
+}

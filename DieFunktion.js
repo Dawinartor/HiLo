@@ -269,7 +269,10 @@ console.log(zufaeligeZahl);
 const umbruch = document.createElement("br");
 const dieForm = document.createElement("form");
 const anleitung = document.createElement("p");
-const inhaltZ0Anleitung = document.createTextNode("Deine Aufgabe ist es die zufällige Zahl zu erraten, dafür hast du sieben Versuche.");
+const counterZeigenRahmen = document.createElement("div");
+const counterZeigenZaehler = document.createElement("div");
+const counterZahl = document.createElement("p");
+const inhaltZ0Anleitung = document.createTextNode("Deine Aufgabe ist es die zufällige Zahl zwischen 1 und 100 zu erraten, dafür hast du sieben Versuche.");
 const inhaltZ1Anleitung = document.createTextNode("Gib dafür einfach eine Zahl in das Feld ein und drück auf den Button.");
 const eingabeInput = document.createElement("input");
 const eingabeButton = document.createElement("input");
@@ -279,25 +282,29 @@ var tooHiOtooLo = document.createElement("p");
 document.body.append(dieForm);
 document.body.append(anleitung);
 document.body.append(tooHiOtooLo);
+document.body.append(counterZeigenRahmen);
 dieForm.appendChild(eingabeInput);
 dieForm.appendChild(eingabeButton);
 anleitung.appendChild(inhaltZ0Anleitung);
 anleitung.appendChild(umbruch);
 anleitung.appendChild(inhaltZ1Anleitung);
-
+counterZeigenRahmen.appendChild(counterZeigenZaehler);
+counterZeigenZaehler.appendChild(counterZahl);
 //adjust things that I create.
 //The paragraphs above input field:
 anleitung.style.color = '#FF00FF';
 anleitung.style.position = 'fixed';
-anleitung.style.top = 5 + 'px';
+anleitung.style.top = 0 + 'px';
+anleitung.style.marginTop = 5 + 'px';
+anleitung.style.marginBottom = 5 + 'px';
 
 //The whole form(Input and Button):
 dieForm.style.backgroundColor = 'red';
 dieForm.style.position = 'fixed';
-dieForm.style.top = 65 + 'px';
+dieForm.style.top = 50 + 'px';
 
 //The input field:
-eingabeInput.id = 'derTip';
+eingabeInput.focus = true;
 eingabeInput.type = 'number';
 eingabeInput.style.width = 200 + 'px';
 eingabeInput.style.height = 25 + 'px';
@@ -307,14 +314,39 @@ eingabeButton.value = 'Tip abgeben';
 eingabeButton.type = 'button';
 eingabeButton.addEventListener("click", getTip);
 eingabeButton.addEventListener("click", highOrLow5);
+eingabeButton.addEventListener("click", checkInsert);
 eingabeButton.style.width = 90 + 'px';
 eingabeButton.style.height = 25 + 'px';
 eingabeButton.style.color = 'black';
 
 //Output if too High or too Low:
 tooHiOtooLo.style.position = 'fixed';
+tooHiOtooLo.style.fontWeight = 5 + 'px';//Change value to a bit more
 tooHiOtooLo.style.fontSize = '155%';
-tooHiOtooLo.style.top = 75 + 'px';
+tooHiOtooLo.style.top = 60 + 'px';
+
+//First container to display counter in HTML:
+counterZeigenRahmen.style.position = 'fixed';
+counterZeigenRahmen.style.top = 5 + 'px';
+counterZeigenRahmen.style.left = 680 + 'px';
+counterZeigenRahmen.style.width = 80 + 'px';
+counterZeigenRahmen.style.height = 80 + 'px';
+counterZeigenRahmen.style.backgroundColor = 'cyan';
+//Second container to display counter in HTML:
+counterZeigenZaehler.style.position = 'inherit';//How called the attribute that takes the place?
+//counterZeigenZaehler.style.top = 1 + 'emp';
+//counterZeigenZaehler.style.left = 1 + 'emp';
+counterZeigenZaehler.style.width = 65 + 'px';
+counterZeigenZaehler.style.height = 65 + 'px';
+counterZeigenZaehler.style.backgroundColor = 'lightgreen';
+//Number in second container in HTML:
+counterZahl.style.position = 'inherit';
+counterZahl.style.fontSize = 150 + '%';
+//counterZahl.style.left = 7 + 'px';
+//counterZahl.style.top = 7 + 'px';
+
+//Every Number that you already tipped:
+// -> var getippteZahl = new Array[5];
 
 //Gathering of functions:
 function getTip(){
@@ -331,31 +363,44 @@ function highOrLow5(){
         eingabeInput.style.backgroundColor = '#FF4040';
         tooHiOtooLo.style.color = 'red';
         tooHiOtooLo.innerHTML = "Deine Zahl ist größer als die gesuchte Zahl!";
+        counterZahl.innerHTML = counter;
     } else if ((meinTip < zufaeligeZahl) && (counter <= 7)) {
         eingabeInput.style.backgroundColor = '#7FFF00';
         tooHiOtooLo.style.color = 'green';
         tooHiOtooLo.innerHTML = "Deine Zahl ist kleiner als die gesuchte Zahl!";
+        counterZahl.innerHTML = counter;
     } else if ((meinTip == zufaeligeZahl) && (counter < 8)) {
         eingabeInput.style.backgroundColor = 'gold';
         tooHiOtooLo.style.color = 'gold';
         tooHiOtooLo.innerHTML = "Du hast die richtige Zahl erraten!";
         eingabeInput.disabled = true;
         eingabeButton.disabled = true;
-    } else if ((meinTip == zufaeligeZahl) && (counter == 7)){
+        counterZahl.innerHTML = counter;
+    } else if ((meinTip == zufaeligeZahl) && (counter >= 7)){
         eingabeInput.style.backgroundColor = 'gold';
         tooHiOtooLo.style.color = 'gold';
         tooHiOtooLo.innerHTML = "Du hast die richtige Zahl erraten!";
         eingabeInput.disabled = true;
         eingabeButton.disabled = true;
+        counterZahl.innerHTML = counter;
     } else if((meinTip != zufaeligeZahl) && (counter >= 6)) {
         tooHiOtooLo.style.color = '#FF00FF';
         tooHiOtooLo.innerHTML = "Du hast keine Versuche mehr! Aktualisiere die Seite um das Spiel neu zu starten!";
         eingabeInput.disabled = true;
         eingabeButton.disabled = true;
+        counterZahl.innerHTML = counter;
     } else {
-        tooHiOtooLo.innerHTML = "So nicht! Neustarten!";
+        tooHiOtooLo.innerHTML = "So nicht! Neustarten!";//
         eingabeInput.disabled = true;
         eingabeButton.disabled = true;
+        counterZahl.innerHTML = counter;
     }
 
+}
+
+function checkInsert(){
+    if(eingabeInput.value == '') {//Try escape-calls
+        console.log("Eingabe muss sein!");
+
+    }
 }

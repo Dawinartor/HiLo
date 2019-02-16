@@ -264,6 +264,7 @@ function highOrLow4(){//Trying by checking two different kind of values
 const zufaeligeZahl = Math.floor(Math.random() * 100);
 var meinTip = 0;
 var counter = 0;
+var keineEingabe = false;
 console.log(zufaeligeZahl);
 //create things that I need:
 const umbruch = document.createElement("br");
@@ -304,7 +305,7 @@ dieForm.style.position = 'fixed';
 dieForm.style.top = 50 + 'px';
 
 //The input field:
-eingabeInput.focus = true;
+eingabeInput.autofocus = true;
 eingabeInput.type = 'number';
 eingabeInput.style.width = 200 + 'px';
 eingabeInput.style.height = 25 + 'px';
@@ -312,9 +313,8 @@ eingabeInput.style.height = 25 + 'px';
 //The Button:
 eingabeButton.value = 'Tip abgeben';
 eingabeButton.type = 'button';
-eingabeButton.addEventListener("click", getTip);
-eingabeButton.addEventListener("click", highOrLow5);
-eingabeButton.addEventListener("click", checkInsert);
+eingabeButton.addEventListener("click", getTip);//This function will activate from top to bottom.
+eingabeButton.addEventListener("click", eingabeGemacht);
 eingabeButton.style.width = 90 + 'px';
 eingabeButton.style.height = 25 + 'px';
 eingabeButton.style.color = 'black';
@@ -351,10 +351,24 @@ counterZahl.style.fontSize = 150 + '%';
 //Gathering of functions:
 function getTip(){
     meinTip = eingabeInput.value;
-    counter++;
+    if(eingabeInput.value == ''){
+        counter = counter;
+    } else {
+        counter++;
+    }
     console.log("mein Tip " + meinTip);
     console.log("Zähler " + counter);
 
+}
+
+function eingabeGemacht(){
+    if(eingabeInput.value == '') {
+        tooHiOtooLo.innerHTML = "Du musst schon eine Zahl eingeben, um das Spiel zu spielen!";
+        console.log("Eingabe wurde nicht gemacht!");
+    } else {
+        console.log("Eingabe wurde gemacht!");
+        highOrLow5();
+    }
 }
 
 function highOrLow5(){
@@ -398,9 +412,3 @@ function highOrLow5(){
 
 }
 
-function checkInsert(){
-    if(eingabeInput.value == '') {//Try escape-calls
-        console.log("Eingabe muss sein!");
-
-    }
-}
